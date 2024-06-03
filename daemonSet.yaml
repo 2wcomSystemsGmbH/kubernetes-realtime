@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: k8s-realtime
+spec:
+  selector:
+    matchLabels:
+      name: k8s-realtime
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  template:
+    metadata:
+      labels:
+        name: k8s-realtime
+    spec:
+      terminationGracePeriodSeconds: 0
+      initContainers:
+        - name: cyclictest
+          image: registry.digitalocean.com/up2talk-k8s-registry/cyclictest:4
+          securityContext:
+            privileged: true
+          env:
+            - name: HIST_LOOPS
+              value: "1000000" # Can be adjusted to give a more accurate estimate of the
+            - name: HIST_MAX_LATENCY
+              value: "400" # Use to configure the maximum latency displayed in the histogram chart
+          volumeMounts:
+            - name: shared-data
+              mountPath: /benchmark/generated
+      containers:
+        - name: http
+          image: httpd:latest
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/local/apache2/htdocs/
+      volumes:
+        - name: shared-data
+          emptyDir: {}
