@@ -31,8 +31,8 @@ The `daemonSet.yaml` file contains the Kubernetes configuration for deploying th
 
 The init container in the DaemonSet has the following environment variables to configure the Cyclitest tool and plot:
 
-HIST_LOOPS: Specifies the number of loops for Cyclitest.
-HIST_MAX_LATENCY: Specifies the maximum latency in microseconds for the test.
+- `HIST_LOOPS`: Specifies the number of loops for Cyclitest. (default: 1000000)
+- `HIST_MAX_LATENCY`: Specifies the maximum latency in microseconds for the test. (default: 400)
 
 ### scripts/
 
