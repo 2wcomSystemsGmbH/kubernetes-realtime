@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 0
       initContainers:
         - name: cyclictest
-          image: registry.digitalocean.com/up2talk-k8s-registry/cyclictest:4
+          image: <your-registry>:<your-tag> # Replace this with your own image:tag
           securityContext:
             privileged: true
           env:

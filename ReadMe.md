@@ -61,6 +61,20 @@ docker push your-repo:tag
 docker buildx build --tag your-repo:tag -o type=image --push --platform=linux/amd64 .
 ```
 
+### Updating the DaemonSet
+
+Before we can deploy the DaemonSet we first have to update the image of the init container with your image and tag:
+
+```yaml
+    ...
+    spec:
+      terminationGracePeriodSeconds: 0
+      initContainers:
+        - name: cyclictest
+          image: <your-registry>:<your-tag> # Replace this with your own image:tag
+    ...
+```
+
 ### Deploying the DaemonSet
 
 To deploy the DaemonSet in your Kubernetes cluster, apply the DaemonSet configuration:
