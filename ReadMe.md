@@ -63,7 +63,7 @@ docker buildx build --tag your-repo:tag -o type=image --push --platform=linux/am
 
 ### Updating the DaemonSet
 
-Before we can deploy the DaemonSet we first have to update the image of the init container with your image and tag:
+Before we can deploy the DaemonSet, update the image of the init container with your image and tag:
 
 ```yaml
     ...
