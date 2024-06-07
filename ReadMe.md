@@ -71,7 +71,7 @@ Before we can deploy the DaemonSet, update the image of the init container with 
       terminationGracePeriodSeconds: 0
       initContainers:
         - name: cyclictest
-          image: <your-registry>:<your-tag> # Replace this with your own image:tag
+          image: <your-repo:tag> # Replace this with your own image:tag
     ...
 ```
 
